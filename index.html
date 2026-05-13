@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặng Lê Hoàng Khánh | Software Engineer Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#8AAAE5',
+                        'soft-blue': '#E8EEF9',
+                        'dark-text': '#1F2937',
+                        'light-gray': '#F3F4F6',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #1F2937;
+            overflow-x: hidden;
+        }
+
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(138, 170, 229, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(138, 170, 229, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(138, 170, 229, 0.2);
+            box-shadow: 0 10px 30px -10px rgba(138, 170, 229, 0.1);
+        }
+
+        .cyber-border {
+            position: relative;
+            border: 1px solid rgba(138, 170, 229, 0.3);
+        }
+
+        .progress-bar {
+            transition: width 1.5s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #8AAAE5;
+            z-index: 200;
+            width: 0%;
+        }
+
+        .btn-primary {
+            background-color: #8AAAE5;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #7292D1;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(138, 170, 229, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div id="scroll-progress"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 w-full z-[100] transition-all duration-500 py-8">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#home" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-black text-xl group-hover:rotate-12 transition-transform shadow-lg">H</div>
+                <span class="text-xl font-display font-bold text-dark-text tracking-tighter">Hoang Khanh <span class="text-primary">.</span></span>
+            </a>
+            
+            <div class="hidden md:flex gap-10 items-center">
+                <a href="#home" class="text-[11px] font-bold text-gray-500 hover:text-primary transition-colors uppercase tracking-[0.2em] relative group">Khởi đầu<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-300"></span></a>
+                <a href="#skills" class="text-[11px] font-bold text-gray-500 hover:text-primary transition-colors uppercase tracking-[0.2em] relative group">Kỹ năng<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-300"></span></a>
+                <a href="#experience" class="text-[11px] font-bold text-gray-500 hover:text-primary transition-colors uppercase tracking-[0.2em] relative group">Kinh nghiệm<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-300"></span></a>
+                <a href="#projects" class="text-[11px] font-bold text-gray-500 hover:text-primary transition-colors uppercase tracking-[0.2em] relative group">Dự án<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-300"></span></a>
+                <a href="#contact" class="text-[11px] font-bold text-gray-500 hover:text-primary transition-colors uppercase tracking-[0.2em] relative group">Liên hệ<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-300"></span></a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-dark-text">
+                <i data-lucide="menu" size="24"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[150] translate-x-full transition-transform duration-500 md:hidden flex flex-col items-center justify-center gap-8">
+        <button id="close-menu-btn" class="absolute top-8 right-8 text-dark-text"><i data-lucide="x" size="32"></i></button>
+        <a href="#home" class="text-2xl font-bold text-dark-text uppercase tracking-widest menu-link">Khởi đầu</a>
+        <a href="#skills" class="text-2xl font-bold text-dark-text uppercase tracking-widest menu-link">Kỹ năng</a>
+        <a href="#experience" class="text-2xl font-bold text-dark-text uppercase tracking-widest menu-link">Kinh nghiệm</a>
+        <a href="#projects" class="text-2xl font-bold text-dark-text uppercase tracking-widest menu-link">Dự án</a>
+        <a href="#contact" class="text-2xl font-bold text-dark-text uppercase tracking-widest menu-link">Liên hệ</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 px-6 grid-bg overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <div data-aos="fade-up" data-aos-duration="1000" class="lg:col-span-7">
+                <div class="inline-flex items-center gap-3 px-4 py-2 bg-soft-blue border border-primary/20 rounded-full mb-8">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    <p class="text-[10px] font-mono font-bold text-primary uppercase tracking-widest">Full-stack Software Engineer</p>
+                </div>
+
+                <h1 class="text-5xl md:text-8xl font-display font-bold leading-[0.95] mb-8 text-dark-text tracking-tighter">
+                    Xin chào, tôi là <br />
+                    <span class="text-primary">Hoàng Khánh</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-600 mb-12 max-w-xl leading-relaxed">
+                    Sinh viên Đại học Nam Cần Thơ (DNC), đam mê phát triển phần mềm và ứng dụng AI. Tôi kiến tạo các giải pháp kỹ thuật hiệu quả và thông minh.
+                </p>
+
+                <div class="flex flex-wrap gap-6 mt-10">
+                    <a href="#projects" class="px-10 py-5 btn-primary font-bold rounded-2xl flex items-center gap-3 active:scale-95">
+                        Xem Dự Án <i data-lucide="chevron-right"></i>
+                    </a>
+                    <button class="px-10 py-5 bg-white border border-gray-200 text-dark-text font-bold rounded-2xl flex items-center gap-3 hover:bg-gray-50 transition-all active:scale-95 shadow-sm">
+                        Tải CV (PDF) <i data-lucide="download"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div data-aos="fade-left" data-aos-duration="1200" class="lg:col-span-5 relative">
+                <div class="relative z-10 w-full aspect-square md:aspect-[4/5] rounded-[60px] overflow-hidden border-8 border-white shadow-2xl group">
+                    <img 
+                        src="https://raw.githubusercontent.com/khanh0112/Du-An/main/cv.jpg" 
+                        alt="Profile" 
+                        class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
+                </div>
+                
+                <div class="absolute -bottom-6 -left-6 glass px-6 py-4 rounded-3xl z-20 border border-primary/20 transform hover:scale-110 transition-transform cursor-pointer">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary"><i data-lucide="cpu" size="20"></i></div>
+                        <div>
+                            <p class="text-[10px] font-mono text-primary font-bold uppercase">AI Focused</p>
+                            <p class="text-xs font-bold text-dark-text tracking-wide">Next-Gen Tech</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 md:py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-[2px] w-8 bg-primary"></div>
+                    <p class="text-primary font-mono text-[10px] font-bold uppercase tracking-[0.4em]">Chuyên môn</p>
+                </div>
+                <h2 class="text-4xl md:text-6xl font-display font-bold text-dark-text tracking-tight">Bộ kỹ năng kỹ thuật</h2>
+            </div>
+
+            <div id="skills-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript will populate here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 md:py-32 px-6 bg-soft-blue/30 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-[2px] w-8 bg-primary"></div>
+                    <p class="text-primary font-mono text-[10px] font-bold uppercase tracking-[0.4em]">Lộ trình</p>
+                </div>
+                <h2 class="text-4xl md:text-6xl font-display font-bold text-dark-text tracking-tight">Kinh nghiệm công tác</h2>
+            </div>
+            
+            <div id="experience-container" class="relative pl-8 md:pl-12 border-l-2 border-primary/20 space-y-20">
+                <!-- Javascript will populate here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 md:py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="h-[2px] w-8 bg-primary"></div>
+                        <p class="text-primary font-mono text-[10px] font-bold uppercase tracking-[0.4em]">Danh mục</p>
+                    </div>
+                    <h2 class="text-4xl md:text-6xl font-display font-bold text-dark-text tracking-tight">Dự án tiêu biểu</h2>
+                </div>
+            </div>
+            
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Javascript will populate here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 md:py-32 px-6 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="flex items-center gap-3 justify-center mb-4">
+                    <div class="h-[2px] w-8 bg-primary"></div>
+                    <p class="text-primary font-mono text-[10px] font-bold uppercase tracking-[0.4em]">Connect</p>
+                    <div class="h-[2px] w-8 bg-primary"></div>
+                </div>
+                <h2 class="text-4xl md:text-6xl font-display font-bold text-dark-text tracking-tight">Liên hệ với tôi</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-12">
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-light-gray/50 p-6 rounded-2xl border border-gray-100 flex items-start gap-4 hover:border-primary/40 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"><i data-lucide="mail" size="20"></i></div>
+                        <div>
+                            <p class="text-dark-text font-bold text-lg mb-1">Thư điện tử</p>
+                            <p class="text-gray-600 font-medium">hoangkhanh20050112@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-light-gray/50 p-6 rounded-2xl border border-gray-100 flex items-start gap-4 hover:border-primary/40 transition-all group">
+                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"><i data-lucide="smartphone" size="20"></i></div>
+                        <div>
+                            <p class="text-dark-text font-bold text-lg mb-1">Điện Thoại</p>
+                            <p class="text-gray-600 font-medium">0949120124</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-light-gray/30 p-8 md:p-12 rounded-[40px] border border-gray-100">
+                    <form class="space-y-8" onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Tin nhắn đã được gửi.');">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-3">
+                                <label class="text-sm font-bold text-dark-text pl-1 font-display">Họ và tên</label>
+                                <input type="text" class="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:border-primary outline-none transition-all text-dark-text" placeholder="Nhập vào họ và tên">
+                            </div>
+                            <div class="space-y-3">
+                                <label class="text-sm font-bold text-dark-text pl-1 font-display">Thư điện tử</label>
+                                <input type="email" class="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:border-primary outline-none transition-all text-dark-text" placeholder="Thư điện tử">
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="text-sm font-bold text-dark-text pl-1 font-display">Tin nhắn</label>
+                            <textarea rows="4" class="w-full bg-white border border-gray-200 rounded-xl px-6 py-4 focus:border-primary outline-none transition-all text-dark-text resize-none" placeholder="Mô tả ý tưởng của bạn..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-5 btn-primary font-black text-lg rounded-2xl flex items-center justify-center gap-3 font-display uppercase tracking-widest">
+                            Gửi Tin Nhắn
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 bg-white border-t border-gray-100 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="flex flex-col items-center md:items-start gap-4">
+                <div class="text-3xl font-display font-bold text-dark-text tracking-tighter">Hoang Khanh<span class="text-primary">.</span></div>
+                <p class="text-gray-400 text-xs font-mono tracking-widest uppercase">© 2026 / SOFTWARE ENGINEER</p>
+            </div>
+            <div class="flex gap-12 text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">
+                <a href="#" class="hover:text-primary transition-colors">GitHub</a>
+                <a href="#" class="hover:text-primary transition-colors">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const SKILLS = [
+            { name: 'Next.js', category: 'Frontend', level: 95, icon: 'layout' },
+            { name: 'React', category: 'Frontend', level: 98, icon: 'layout' },
+            { name: 'Tailwind CSS', category: 'Frontend', level: 96, icon: 'layout' },
+            { name: 'C# WinForms', category: 'Backend', level: 90, icon: 'database' },
+            { name: 'Firebase', category: 'Cloud', level: 88, icon: 'cloud' },
+            { name: 'AI Algorithms', category: 'AI Tech', level: 85, icon: 'cpu' }
+        ];
+
+        const PROJECTS = [
+            {
+                title: 'Quản lý Bán Cà Phê AI',
+                desc: 'Tích hợp tính năng "Smart Review" và "AI Generator" tự động tối ưu hóa quy trình bán hàng.',
+                tech: ['AI', 'React', 'Node.js'],
+                image: 'https://raw.githubusercontent.com/khanh0112/Du-An/main/Screenshot%202026-03-28%20001521.png',
+                drive:'#'
+            },
+            {
+                title: 'Hệ thống Tính Tiền Điện',
+                desc: 'Ứng dụng C# WinForms với logic tính tiền điện bậc thang phức tạp và tối ưu hóa dữ liệu.',
+                tech: ['C#', 'SQL Server'],
+                image: 'https://raw.githubusercontent.com/khanh0112/Du-An/main/233273_DangLeHoangKhanh_DH23TIN02.png',
+                drive:'#'
+            }
+        ];
+
+        const EXPERIENCE = [
+            {
+                period: '2026 - Nay',
+                title: 'Founder',
+                company: 'Hộ kinh doanh Hỏa Hợp',
+                desc: 'Dẫn dắt và định hướng kinh doanh lĩnh vực công nghệ, số hóa quy trình vận hành.',
+                color: 'primary'
+            },
+            {
+                period: '2024 - 2026',
+                title: 'AI Solutions Developer',
+                company: 'Freelance',
+                desc: 'Thiết kế giải pháp AI (Gemini, OpenAI) vào quy trình kinh doanh.',
+                color: 'primary'
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            AOS.init({ once: true });
+            renderSkills();
+            renderExperience();
+            renderProjects();
+            setupNavbar();
+            setupMenu();
+        });
+
+        function renderSkills() {
+            const container = document.getElementById('skills-container');
+            SKILLS.forEach((skill, i) => {
+                const div = document.createElement('div');
+                div.className = 'glass p-8 rounded-[32px] group hover:border-primary/50 transition-all';
+                div.setAttribute('data-aos', 'fade-up');
+                
+                div.innerHTML = `
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-primary/10 rounded-2xl text-primary">
+                            <i data-lucide="${skill.icon}" size="20"></i>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] font-mono text-gray-400 font-bold uppercase tracking-widest mb-1">${skill.category}</p>
+                            <p class="text-2xl font-display font-bold text-dark-text">${skill.level}%</p>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold text-dark-text mb-6 font-display">${skill.name}</h4>
+                    <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-primary progress-bar" style="width: 0%" data-level="${skill.level}"></div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-level') + '%';
+                        });
+                    }
+                });
+            }, { threshold: 0.1 });
+            observer.observe(container);
+            lucide.createIcons();
+        }
+
+        function renderExperience() {
+            const container = document.getElementById('experience-container');
+            EXPERIENCE.forEach((exp, i) => {
+                const div = document.createElement('div');
+                div.className = 'relative group';
+                div.setAttribute('data-aos', 'fade-left');
+
+                div.innerHTML = `
+                    <div class="absolute -left-[42px] md:-left-[59px] top-0 w-6 h-6 rounded-full border-4 border-white bg-primary shadow-md transition-transform group-hover:scale-125"></div>
+                    <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+                        <span class="font-mono text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                            ${exp.period}
+                        </span>
+                        <h3 class="text-2xl font-bold text-dark-text md:pl-4 font-display tracking-tight">${exp.title}</h3>
+                    </div>
+                    <p class="text-xl text-primary font-bold mb-4 tracking-tight">${exp.company}</p>
+                    <p class="text-gray-600 max-w-3xl leading-relaxed text-lg">${exp.desc}</p>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            PROJECTS.forEach((p, i) => {
+                const div = document.createElement('div');
+                div.className = 'group relative';
+                div.innerHTML = `
+                    <div class="relative aspect-video rounded-[40px] overflow-hidden border-4 border-gray-50 shadow-xl mb-8">
+                        <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
+                            <h3 class="text-2xl font-bold text-white uppercase">${p.title}</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed font-medium mb-6 px-4 italic">${p.desc}</p>
+                    <div class="px-4"><a href="${p.drive}" class="inline-flex items-center gap-2 text-primary font-bold hover:underline">Chi tiết dự án <i data-lucide="external-link" size="16"></i></a></div>
+                `;
+                container.appendChild(div);
+            });
+            lucide.createIcons();
+        }
+
+        function setupNavbar() {
+            const nav = document.getElementById('navbar');
+            const progress = document.getElementById('scroll-progress');
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                const height = document.documentElement.scrollHeight - window.innerHeight;
+                progress.style.width = (scrolled / height) * 100 + '%';
+                if (scrolled > 20) {
+                    nav.classList.add('bg-white/90', 'backdrop-blur-xl', 'py-4', 'shadow-sm');
+                    nav.classList.remove('py-8');
+                } else {
+                    nav.classList.remove('bg-white/90', 'backdrop-blur-xl', 'py-4', 'shadow-sm');
+                    nav.classList.add('py-8');
+                }
+            });
+        }
+
+        function setupMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const close = document.getElementById('close-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const toggle = () => menu.classList.toggle('translate-x-full');
+            btn.addEventListener('click', toggle);
+            close.addEventListener('click', toggle);
+            document.querySelectorAll('.menu-link').forEach(l => l.addEventListener('click', toggle));
+        }
+    </script>
+</body>
+</html>
